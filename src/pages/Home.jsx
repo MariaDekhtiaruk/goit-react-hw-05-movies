@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { getTrending } from 'MovieAPI';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+
 const Home = () => {
+  const location = useLocation();
   const [trendingMovies, setTrendingMovies] = useState([]);
   useEffect(() => {
     (async () => {
@@ -16,7 +18,12 @@ const Home = () => {
       <ul>
         {trendingMovies.map(item => (
           <li key={item.id}>
-            <Link to={`/movies/${item.id}`}>{item.original_title}</Link>
+            <Link
+              to={`/movies/${item.id}`}
+              state={{ prevPage: location.pathname }}
+            >
+              {item.original_title}
+            </Link>
           </li>
         ))}
       </ul>

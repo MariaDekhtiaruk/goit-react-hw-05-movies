@@ -2,6 +2,9 @@ import { Routes, Route } from 'react-router-dom';
 import Home from 'pages/Home';
 import Movies from 'pages/Movies';
 import MovieDetails from 'pages/MovieDetails';
+import CastDetails from 'pages/Cast';
+import MovieReview from 'pages/Reviews';
+import { NotFound } from 'pages/NotFound';
 import { Container, Link } from './App.styled';
 
 function App() {
@@ -17,12 +20,10 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/movies" element={<Movies />}></Route>
         <Route path="/movies/:movieId" element={<MovieDetails />}>
-          <Route path="cast" element={<div>Cast</div>} />
-          <Route path="reviews" element={<div>Reviews</div>} />
+          <Route path="cast" element={<CastDetails />} />
+          <Route path="reviews" element={<MovieReview />} />
         </Route>
-
-        {/* <Route path="*" element={<NotFound />} /> */}
-        {/* <Route path="/movies/:movieId" element={<MovieDetails />}></Route> */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Container>
   );
