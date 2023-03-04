@@ -1,5 +1,5 @@
 import { searchMovie } from 'MovieAPI';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { LinkToPrevPage } from '../../components/LinkToPrevPage';
 import { MovieBtn, InputMovieWrap } from 'pages/MoviePage/Movies.styled';
@@ -9,17 +9,7 @@ const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query');
 
-  useEffect(() => {
-    // First search if search query is set
-    if (query) searchHandler();
-  }, []);
-
-  const handleQueryChange = event => {
-    const { value } = event.target;
-    setSearchParams({ query: value }, { replace: true }); //записати тернарник на очищення строки 30хв репети відео 2
-  };
-
-  const searchHandler = () => {
+  const searchHandler = useCallback(() => {
     if (!query) {
       return alert('Enter movie');
     }
@@ -27,6 +17,16 @@ const Movies = () => {
       const movies = await searchMovie(query);
       setMovies(movies.results);
     })();
+  }, [query]);
+
+  useEffect(() => {
+    // First search if search query is set
+    if (query) searchHandler();
+  }, [query, searchHandler]);
+
+  const handleQueryChange = event => {
+    const { value } = event.target;
+    setSearchParams({ query: value }, { replace: true }); //записати тернарник на очищення строки 30хв репети відео 2
   };
 
   return (
