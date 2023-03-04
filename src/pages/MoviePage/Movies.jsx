@@ -1,6 +1,6 @@
 import { searchMovie } from 'MovieAPI';
 import { useEffect, useState } from 'react';
-import { useSearchParams, Link, useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { LinkToPrevPage } from '../../components/LinkToPrevPage';
 import { MovieBtn, InputMovieWrap } from 'pages/MoviePage/Movies.styled';
 const Movies = () => {
