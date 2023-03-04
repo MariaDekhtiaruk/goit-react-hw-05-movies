@@ -1,7 +1,7 @@
 import { getMovieCast } from 'MovieAPI';
 import { useEffect, useState } from 'react';
-
 import { useParams } from 'react-router-dom';
+import { LiStyle } from 'components/CastReview/CastReview.styled';
 
 const CastDetails = () => {
   const { movieId } = useParams();
@@ -13,14 +13,18 @@ const CastDetails = () => {
     })();
   }, [movieId]);
   console.log('cast', cast);
-  return cast ? (
+
+  const isEmpty = cast.length === 0;
+  return isEmpty ? (
+    <b>No information here :(</b>
+  ) : cast ? (
     <>
       <ul>
         {cast.map(item => (
-          <li key={item.id}>
-            <h2>{item.name ? item.name : 'Unknown'}</h2>
+          <LiStyle key={item.id}>
+            <h4>{item.name ? item.name : 'Unknown'}</h4>
             <p>{item.character ? item.character : 'Unknown'}</p>
-          </li>
+          </LiStyle>
         ))}
       </ul>
     </>

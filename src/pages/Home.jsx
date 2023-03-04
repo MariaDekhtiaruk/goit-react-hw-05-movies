@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { getTrending } from 'MovieAPI';
-import { Link, useLocation } from 'react-router-dom';
+import { LinkToPrevPage } from '../components/LinkToPrevPage';
 
 const Home = () => {
-  const location = useLocation();
   const [trendingMovies, setTrendingMovies] = useState([]);
   useEffect(() => {
     (async () => {
@@ -14,16 +13,13 @@ const Home = () => {
 
   return (
     <div>
-      <h1> Trending today</h1>
+      <h2> Trending today:</h2>
       <ul>
         {trendingMovies.map(item => (
           <li key={item.id}>
-            <Link
-              to={`/movies/${item.id}`}
-              state={{ prevPage: location.pathname }}
-            >
+            <LinkToPrevPage to={`/movies/${item.id}`}>
               {item.original_title}
-            </Link>
+            </LinkToPrevPage>
           </li>
         ))}
       </ul>

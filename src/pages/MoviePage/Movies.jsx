@@ -1,9 +1,10 @@
 import { searchMovie } from 'MovieAPI';
 import { useEffect, useState } from 'react';
 import { useSearchParams, Link, useLocation } from 'react-router-dom';
-
+import { LinkToPrevPage } from '../../components/LinkToPrevPage';
+import { MovieBtn, InputMovieWrap } from 'pages/MoviePage/Movies.styled';
 const Movies = () => {
-  const location = useLocation();
+  // const location = useLocation();
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query');
@@ -30,19 +31,20 @@ const Movies = () => {
 
   return (
     <div>
-      <h1>
-        Movie finder <input type="text" onChange={handleQueryChange} />
-        <button onClick={searchHandler}>Search</button>
-      </h1>
+      <h3>Find Movie to watch</h3>
+      <InputMovieWrap>
+        <input type="text" onChange={handleQueryChange} />
+        <MovieBtn onClick={searchHandler}>Search</MovieBtn>
+      </InputMovieWrap>
       <ul>
         {movies.map(item => (
           <li key={item.id}>
-            <Link
+            <LinkToPrevPage
               to={`/movies/${item.id}`}
-              state={{ prevPage: location.pathname }}
+              // state={{ prevPage: location.pathname }}
             >
               {item.original_title}
-            </Link>
+            </LinkToPrevPage>
           </li>
         ))}
       </ul>

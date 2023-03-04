@@ -21,10 +21,20 @@ export const Header = styled.header`
   }
 `;
 
-export const Logo = styled.p`
-  font-weight: 700;
-  margin: 0;
+export const Main = styled.main`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  margin-bottom: 16px;
+  border-bottom: 1px solid black;
 `;
+
+// export const Logo = styled.p`
+//   font-weight: 700;
+//   margin: 0;
+// `;
 
 export const Link = styled(NavLink)`
   padding: 8px 16px;
