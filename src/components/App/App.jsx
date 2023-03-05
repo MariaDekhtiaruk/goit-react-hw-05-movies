@@ -28,7 +28,7 @@ function App() {
       </Header>
       <Routes>
         <Route
-          path="/"
+          index
           element={
             <Suspended>
               <Home />
